@@ -1,10 +1,22 @@
+import { format } from 'date-fns';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-export const BookingModal = ({ appoinment }) => {
+export const BookingModal = ({ appoinment, modalInfo, selectedDate }) => {
     const { register, handleSubmit } = useForm();
 
+    const { name, slots } = modalInfo;
     const onSubmit = data => {
+        const { fullname, number, slots, date, email } = data;
+        const boking = {
+            pataint: fullname,
+            tretment: name,
+            number,
+            slots,
+            selected: date,
+            email,
+        }
+        console.log(boking)
     };
 
 
@@ -20,11 +32,22 @@ export const BookingModal = ({ appoinment }) => {
                     {/* My Custom  */}
 
                     <form className='form-group space-y-10' onSubmit={handleSubmit(onSubmit)}>
+                        <h1>{name}</h1>
                         <div>
-                            <input required placeholder='Full Name' className={InputClass} type='text' {...register("name")} />
+                            <input required placeholder='Full Name' className={InputClass} type='text'{...register("date")} value={format(selectedDate, 'PP')} />
                         </div>
                         <div>
-                            <input required placeholder='PhoneNumber' className={InputClass} type='email' {...register("number")} />
+                            <select {...register("slots")} className={InputClass}>
+                                {
+                                    slots && slots.map(slot => <option value={slot}>{slot}</option>)
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <input required placeholder='Full Name' className={InputClass} type='text' {...register("fullname")} />
+                        </div>
+                        <div>
+                            <input required placeholder='PhoneNumber' className={InputClass} type='number' {...register("number")} />
                         </div>
                         <div>
                             <input required placeholder='Email' className={InputClass} type='email' {...register("email", { pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ })} />

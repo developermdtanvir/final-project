@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export const AvailableOption = ({ option, appoinment }) => {
+export const AvailableOption = ({ option, appoinment, handlModalInfo }) => {
     const { name, slots, _id } = option
-    const [modalInfo, setModalInfo] = useState({})
-    console.log(modalInfo)
 
-    const handlModalInfo = id => {
-        const info = appoinment.find(option => option._id === id);
-        setModalInfo(info);
-    }
     return (
         <div className="card w-96 cursor-pointer shadow-xl hover:shadow-2xl duration-700">
             <div className="card-body text-center">
@@ -19,7 +13,7 @@ export const AvailableOption = ({ option, appoinment }) => {
 
                 {/* Put this part before </body> tag */}
                 <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-                <label onClick={() => handlModalInfo(_id)} htmlFor="booking_modal" className="btn">open modal</label>
+                <label disabled={slots.length === 0} onClick={() => handlModalInfo(_id)} htmlFor="booking_modal" className="btn">open modal</label>
             </div>
         </div>
     )
