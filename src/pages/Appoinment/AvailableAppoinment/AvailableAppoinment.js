@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { AvailableOption } from './AvailableOption';
+import { BookingModal } from './BookingModal';
 
 export const AvailableAppoinment = ({ selectedDate }) => {
     const [appoinment, setAppoinment] = useState([]);
@@ -18,9 +19,10 @@ export const AvailableAppoinment = ({ selectedDate }) => {
             </div>
             <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
                 {
-                    appoinment.map(option => <AvailableOption key={option._id} option={option} />)
+                    appoinment.map(option => <AvailableOption key={option._id} appoinment={appoinment} option={option} />)
                 }
             </div>
+            <BookingModal />
         </div>
 
     )
