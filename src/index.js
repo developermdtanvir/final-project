@@ -1,9 +1,11 @@
 import React from 'react';
+import 'react-day-picker/dist/style.css';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AuthContext } from './Context/AuthContext/AuthContext';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

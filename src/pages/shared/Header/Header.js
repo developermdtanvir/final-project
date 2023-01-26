@@ -5,7 +5,7 @@ export const Header = () => {
     const menueItems = <>
         <li><Link to='/' className='btn'>Home</Link></li>
         <li><Link>About</Link></li>
-        <li><Link>Appoinment</Link></li>
+        <li><Link to='/appoinment'>Appoinment</Link></li>
         <li><Link>Review</Link></li>
         <li><Link>Contact us</Link></li>
         <li><Link to='/login'>Login</Link></li>
