@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext/AuthContext';
 
@@ -7,7 +8,7 @@ export const Register = () => {
     const [success, setSuccess] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { registerEmailPassword } = useContext(AuthProvider);
+    const { registerEmailPassword, updateUserName } = useContext(AuthProvider);
 
     const onSubmit = data => {
         const { email, password } = data;
@@ -15,14 +16,19 @@ export const Register = () => {
         registerEmailPassword(email, password)
             .then(res => {
                 setSuccess(true);
+                toast.success('User Created Successfully')
+                updateUserName(data.name)
+                    .then(data => console.log(data))
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                toast.error('Your Password is wrong');
+                console.error(error)
+            });
 
     };
     const InputClass = `form-control  block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`
     return (
         <div className=' flex justify-center items-center'>
-            {success && <p className=' text-green-600'>User Created Successfully</p>}
             <div className='block p-6 rounded-lg shadow-lg bg-white max-w-md'>
                 <form className='form-group space-y-10' onSubmit={handleSubmit(onSubmit)}>
                     <div>

@@ -8,11 +8,7 @@ export const AppoinmentOptions = ({ selectedDate, appoinment, setTretment }) => 
             <div className="card-body">
                 <h2 className="text-center font-semibold text-xl">{name}</h2>
                 <p>
-                    <select className="select w-full text-center">
-                        {
-                            slots.map(slot => <option value={slot}>{slot}</option>)
-                        }
-                    </select>
+
                 </p>
                 {slots.length > 0 ? <p>service Available {slots.length}</p> : 'Not Available Service'}
                 <div className="card-actions justify-center">
