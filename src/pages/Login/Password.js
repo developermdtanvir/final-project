@@ -5,8 +5,8 @@ import { AuthProvider } from '../../Context/AuthContext/AuthContext';
 import { SocialLogin } from './SocialLogin';
 
 export const Password = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const { signInUserEmailPassword, loading } = useContext(AuthProvider);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signInUserEmailPassword } = useContext(AuthProvider);
     const [loginError, setLoginError] = useState('');
     const location = useLocation()
     const navigate = useNavigate()
@@ -26,9 +26,7 @@ export const Password = () => {
                 setLoginError('Your Password is wrong')
             })
     };
-    if (loading) {
-        return <button className="btn btn-square loading"></button>
-    }
+
     const InputClass = `form-control  block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
     `
     return (

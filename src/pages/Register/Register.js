@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext/AuthContext';
 
 export const Register = () => {
+    const navigate = useNavigate()
     const [success, setSuccess] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -18,7 +19,10 @@ export const Register = () => {
                 setSuccess(true);
                 toast.success('User Created Successfully')
                 updateUserName(data.name)
-                    .then(data => console.log(data))
+                    .then(data => {
+                        console.log(data)
+                        navigate('/')
+                    });
             })
             .catch(error => {
                 toast.error('Your Password is wrong');

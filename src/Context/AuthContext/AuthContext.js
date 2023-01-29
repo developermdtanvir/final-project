@@ -21,7 +21,6 @@ export const AuthContext = ({ children }) => {
         return signOut(auth)
     }
     const googleLogin = () => {
-        setLoading(true);
         return signInWithPopup(auth, googleProvider)
     }
     const updateUserName = (name) => {
