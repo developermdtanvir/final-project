@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { AuthProvider } from '../../../Context/AuthContext/AuthContext';
 
 export const BookingModal = ({ tretment, selectedDate, setTretment, refetch }) => {
-    const { name, slots } = tretment;
+    const { name, slots, price } = tretment;
     const { register, handleSubmit } = useForm();
     const { user } = useContext(AuthProvider)
     const onSubmit = data => {
@@ -16,7 +16,8 @@ export const BookingModal = ({ tretment, selectedDate, setTretment, refetch }) =
             fullName,
             number,
             slots,
-            tretment: name
+            tretment: name,
+            price
         }
         fetch('http://localhost:5000/booking', {
             method: 'POST',

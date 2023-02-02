@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -5,14 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext/AuthContext';
 
 export const Register = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [success, setSuccess] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
-
     const { registerEmailPassword, updateUserName } = useContext(AuthProvider);
-
     const onSubmit = data => {
-        const { email, password } = data;
+        const { email, password, name } = data;
 
         registerEmailPassword(email, password)
             .then(res => {
@@ -21,7 +20,7 @@ export const Register = () => {
                 updateUserName(data.name)
                     .then(data => {
                         console.log(data)
-                        navigate('/')
+                        saveUserInfo(name, email)
                     });
             })
             .catch(error => {
@@ -30,6 +29,37 @@ export const Register = () => {
             });
 
     };
+
+    const saveUserInfo = (name, email) => {
+        const user = { name, email };
+        // fetch('http://localhost:5000/users', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(user)
+        // }).then(res => res.json())
+        //     .then(data => console.log(data));
+        axios.post('http://localhost:5000/users', user)
+            .then(res => {
+                getToken(email)
+            })
+    }
+    const getToken = email => {
+        axios.get(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => {
+                if (res.data.token) {
+                    localStorage.setItem('token', res.data.token)
+                }
+                navigate('/')
+            });
+    }
+
+
+
+
+
+
     const InputClass = `form-control  block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none`
     return (
         <div className=' flex justify-center items-center'>

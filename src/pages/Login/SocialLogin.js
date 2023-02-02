@@ -1,11 +1,21 @@
-import React, { useContext } from 'react'
-import { AuthProvider } from '../../Context/AuthContext/AuthContext'
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthProvider } from '../../Context/AuthContext/AuthContext';
+import useToken from '../../hooks/useToken';
 
 export const SocialLogin = () => {
-    const { googleLogin } = useContext(AuthProvider)
+    const { googleLogin } = useContext(AuthProvider);
+    const [userEmail, setUserEmail] = useState('');
+    const navigate = useNavigate()
+    const [token] = useToken(userEmail);
+    if (token) {
+        navigate('/')
+    }
     const handleGoogleSignIn = () => {
         googleLogin()
-            .then(res => console.log(res))
+            .then(res => {
+                setUserEmail(res.user.email)
+            })
     }
     return (
         <div>
