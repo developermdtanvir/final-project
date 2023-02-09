@@ -6,11 +6,11 @@ import { Speainer } from '../../shared/Speainer/Speainer';
 export const AllUsers = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['users'],
-        queryFn: () => fetch('http://localhost:5000/users').then(res => res.json())
+        queryFn: () => fetch('https://doctors-portal-server-liart-eight.vercel.app/users').then(res => res.json())
     });
     const handleMakeAdmin = id => {
         console.log(id);
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://doctors-portal-server-liart-eight.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authrizetion: `bearer ${localStorage.getItem('token')}`

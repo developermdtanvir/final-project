@@ -14,7 +14,7 @@ export const CheckoutForm = ({ booking, setCardError, setCardSuccess }) => {
     const [trensectionId, setTrensectionId] = useState('')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/create-payment-intent`, {
+        fetch(`https://doctors-portal-server-liart-eight.vercel.app/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -75,13 +75,14 @@ export const CheckoutForm = ({ booking, setCardError, setCardSuccess }) => {
             return;
         }
         if (paymentIntent.status === "succeeded") {
+            console.log(paymentIntent);
             const payment = {
                 price,
                 trensectionId: paymentIntent.id,
                 email,
                 boookingId: booking._id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://doctors-portal-server-liart-eight.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

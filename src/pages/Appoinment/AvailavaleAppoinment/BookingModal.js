@@ -19,7 +19,7 @@ export const BookingModal = ({ tretment, selectedDate, setTretment, refetch }) =
             tretment: name,
             price
         }
-        fetch('http://localhost:5000/booking', {
+        fetch('https://doctors-portal-server-liart-eight.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

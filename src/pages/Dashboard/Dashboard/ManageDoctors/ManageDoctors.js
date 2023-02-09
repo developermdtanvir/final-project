@@ -8,7 +8,7 @@ import { Speainer } from '../../../shared/Speainer/Speainer'
 export const ManageDoctors = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['doctors'],
-        queryFn: () => axios.get('http://localhost:5000/doctors', {
+        queryFn: () => axios.get('https://doctors-portal-server-liart-eight.vercel.app/doctors', {
             headers: {
                 authrizetion: `bearer ${localStorage.getItem('token')}`
             }
@@ -23,7 +23,7 @@ export const ManageDoctors = () => {
         return <Speainer></Speainer>
     }
     const handleDoctorDelete = data => {
-        axios.delete(`http://localhost:5000/doctors/${data._id}`, {
+        axios.delete(`https://doctors-portal-server-liart-eight.vercel.app/doctors/${data._id}`, {
             headers: {
                 authrizetion: `bearer ${localStorage.getItem('token')}`
             }

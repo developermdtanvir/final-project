@@ -9,7 +9,7 @@ export const Dashboard = () => {
     const { user } = useContext(AuthProvider);
     const { data = [], isLoading } = useQuery({
         queryKey: ['booking', user?.email],
-        queryFn: () => axios.get(`http://localhost:5000/booking?email=${user?.email}`, {
+        queryFn: () => axios.get(`https://doctors-portal-server-liart-eight.vercel.app/booking?email=${user?.email}`, {
             headers: {
                 authrizetion: `bearer ${localStorage.getItem('token')}`
             }

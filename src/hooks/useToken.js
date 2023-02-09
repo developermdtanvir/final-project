@@ -4,7 +4,7 @@ export const useToken = (email) => {
     const [token, setToken] = useState('');
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/jwt?email=${email}`)
+            fetch(`https://doctors-portal-server-liart-eight.vercel.app/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -13,7 +13,7 @@ export const useToken = (email) => {
                         setToken(data.accessToken);
                     }
                 })
-            // axios.get(`http://localhost:5000/jwt?email=${email}`)
+            // axios.get(`https://doctors-portal-server-liart-eight.vercel.app/jwt?email=${email}`)
             //     .then(res => {
             //         if (res.data.accessToken) {
             //             localStorage.setItem('token', res.data.accessToken)

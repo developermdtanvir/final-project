@@ -32,7 +32,7 @@ export const Register = () => {
 
     const saveUserInfo = (name, email) => {
         const user = { name, email };
-        // fetch('http://localhost:5000/users', {
+        // fetch('https://doctors-portal-server-liart-eight.vercel.app/users', {
         //     method: 'POST',
         //     headers: {
         //         'content-type': 'application/json'
@@ -40,16 +40,18 @@ export const Register = () => {
         //     body: JSON.stringify(user)
         // }).then(res => res.json())
         //     .then(data => console.log(data));
-        axios.post('http://localhost:5000/users', user)
+        axios.post('https://doctors-portal-server-liart-eight.vercel.app/users', user)
             .then(res => {
                 getToken(email)
             })
     }
     const getToken = email => {
-        axios.get(`http://localhost:5000/jwt?email=${email}`)
+        console.log(email)
+        axios.get(`https://doctors-portal-server-liart-eight.vercel.app/jwt?email=${email}`)
             .then(res => {
-                if (res.data.token) {
-                    localStorage.setItem('token', res.data.token)
+                console.log(res);
+                if (res.data.accessToken) {
+                    localStorage.setItem('token', res.data.accessToken)
                 }
                 navigate('/')
             });

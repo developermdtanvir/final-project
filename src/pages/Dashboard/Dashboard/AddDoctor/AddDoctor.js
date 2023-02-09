@@ -14,15 +14,11 @@ export const AddDoctor = () => {
     const handleAddDoctor = data => {
         const { email, password, name, specify } = data;
 
-        const image = data.img[0]
+        const image = data.img[0];
         const formData = new FormData();
         formData.append('image', image);
-        const url = ` https://api.imgur.com/`
-        fetch(url, {
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbb_key}`, {
             method: 'POST',
-            headers: {
-                Authorization: "Client-ID d9350bab70bac9f"
-            },
             body: formData
         }).then(res => console.log(res))
             .then(data => console.log(data));
@@ -30,9 +26,9 @@ export const AddDoctor = () => {
             name,
             email,
             specify,
-            img: image
+
         }
-        axios.post('http://localhost:5000/doctors', doctors).then(res => {
+        axios.post('https://doctors-portal-server-liart-eight.vercel.app/doctors', doctors).then(res => {
             if (res.data.acknowledged) {
                 toast.success('Doctors Added successfully');
                 navigate('/dashboard/managedoctors')
@@ -42,7 +38,7 @@ export const AddDoctor = () => {
     };
     const { data, isLoading } = useQuery({
         queryKey: ['appoinmentSpecality'],
-        queryFn: () => axios.get('http://localhost:5000/appoinmentSpecality')
+        queryFn: () => axios.get('https://doctors-portal-server-liart-eight.vercel.app/appoinmentSpecality')
     });
     if (isLoading) {
         return <Speainer></Speainer>

@@ -10,7 +10,7 @@ export const AvaivleAppoinment = ({ selectedDate, setSelectedDate }) => {
     const date = format(selectedDate, 'PP')
     const { data: appoinment, isLoading, refetch } = useQuery({
         queryKey: ['appoinment', date],
-        queryFn: () => fetch(`http://localhost:5000/appoinment?date=${date}`).then(res => res.json())
+        queryFn: () => fetch(`https://doctors-portal-server-liart-eight.vercel.app/appoinment?date=${date}`).then(res => res.json())
     })
     if (isLoading) {
         return <Speainer />
